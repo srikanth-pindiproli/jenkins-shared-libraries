@@ -1,14 +1,16 @@
-#!groovy
+pipeline {
+  agent any
 
-node('master') {
-  stage('Checkout') {
-    checkout scm
+  stages {
+    stage ('Clone') {
+      checkout scm
+    }
   }
-
+  
   stage('Compile') {
     withMaven(maven: 'Maven 3') {
       sh 'mvn clean compile'
     }
   }
 }
-    
+
